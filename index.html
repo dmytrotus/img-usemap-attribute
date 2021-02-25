@@ -1,0 +1,80 @@
+    .mapster('rebind',basic_opts);
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://www.outsharked.com/scripts/jquery.imagemapster.js"></script>
+
+<style type="text/css">
+    img{
+        max-width: 100%;
+    }
+    .speech-bubbles{
+        position: absolute;
+    }
+</style>
+<img src="https://images.unsplash.com/photo-1613489754267-3023f6f80009?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80" 
+usemap="#image-banner">
+<map id="wnk_image_map" name="image-banner">
+    <area href="#" data-id="osoba-1" shape="rect" coords="512,460,756,24">
+    <area href="#" data-id="osoba-2" shape="rect" coords="752,460,1056,24">
+    <area href="#" data-id="osoba-3" shape="rect" coords="1060,460,1200,24">
+    <area href="#" data-id="osoba-4" shape="rect" coords="1220,460,1500,24">
+</map>
+<div class="speech-bubbles">
+    <span data-id="osoba-1">
+        <a href="/osoba-1">Poznaj moją historię</a>
+    </span>
+    <span data-id="osoba-2">
+        <a href="/osoba-2">Poznaj moją historię</a>
+    </span>
+    <span data-id="osoba-3">
+        <a href="/osoba-3">Poznaj moją historię</a>
+    </span>
+    <span data-id="osoba-4">
+        <a href="/osoba-4">Poznaj moją historię</a>
+    </span>
+</div>
+
+
+
+
+<script>
+var basic_opts = {
+    mapKey: 'data-id'
+};
+
+var initial_opts = $.extend({},basic_opts, 
+    { 
+        staticState: true,
+        fill: false,
+        stroke: true,
+        strokeWidth: 2,
+        strokeColor: 'ff0000'
+    });
+
+$('img').mapster(initial_opts)
+    .mapster('set',true,'CA', {
+        fill: true,
+        fillColor: '00ff00'
+    })
+    .mapster('snapshot')
+    .mapster('rebind',basic_opts);
+//// mapster makes incorrect coortinates in reality need to move 200px left 
+////when mapster is turned on there is a gap on the right side of image ( need to disconnect mapster on production)
+///end mapster
+</script>
+
+<script>
+    /*const areas = [...document.querySelectorAll('area')];
+    areas.map(el => {
+        console.log(el.getAttribute('data-name'))
+    })*/
+    /*$('area').click(function(e){
+        e.preventDefault();
+        const linkTo = $(this).attr('href')
+        location.href = linkTo;
+    })*/
+    $('area').hover(function(e){
+        e.preventDefault();
+        const speechBubbleId = $(this).attr('data-id')
+        console.log(speechBubbleId)
+    })
+</script>
